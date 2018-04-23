@@ -60,11 +60,11 @@ plt.xlabel('Population of City in 10,000s')
 plt.ylabel('Profit in $10,000s')
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\数据1.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E6%95%B0%E6%8D%AE1.png)
 
 **计算损失函数**
 
-![](C:\ML-Excercise\pictures\chapter2\线性回归7.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%927.png)
 
 ```python
 # theta默认值为[0,0]T
@@ -84,7 +84,7 @@ Out[15]: 32.072733877455676
 
 **梯度下降函数**
 
-![](C:\ML-Excercise\pictures\chapter2\线性回归11.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%9211.png)
 
 ```python
 # 默认迭代次数为1500次，学习率alfa取0.01
@@ -117,7 +117,7 @@ plt.ylabel('Cost J')
 plt.xlabel('Iterations')
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\迭代1.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E8%BF%AD%E4%BB%A31.png)
 
 可见在迭代了1500次以后，损失函数J的值趋近收敛。
 
@@ -131,7 +131,7 @@ plt.scatter(X[:,1], y, s=30, c='r', marker='x', linewidths=1)
 plt.plot(xx,yy, label='Linear regression (Gradient descent)')
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\梯度下降线性回归.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92.png)
 
 ```python
 # 和Scikit-learn中的线性回归对比一下 
@@ -152,7 +152,7 @@ plt.ylabel('Profit in $10,000s')
 plt.legend(loc=4)
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\梯度下降与Scikit对比.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%B8%8EScikit%E5%AF%B9%E6%AF%94.png)
 
 可以看出两者基本重合。
 
