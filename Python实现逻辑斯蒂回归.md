@@ -1,6 +1,10 @@
 # Python实现逻辑斯蒂回归
 
-本实验室根据两次考试成绩与通过的数据，通过logistic回归，最后获得一个分类器。
+[逻辑回归介绍](http://www.ai-start.com/ml2014/html/week3.html)
+
+本实验室根据两次考试成绩与是否通过的数据，通过logistic回归，最后获得一个分类器。
+
+## 逻辑斯蒂回归
 
 **导入数据**
 
@@ -88,7 +92,7 @@ y为：
 
 ```python
 # 定义sigmoid函数
- def sigmoid(z):
+def sigmoid(z):
     return(1 / (1 + np.exp(-z)))
 ```
 
@@ -145,4 +149,67 @@ Grad:
  [ -0.1        -12.00921659 -11.26284221]
 
 **最小化损失函数**
+
+[minimize()函数的介绍](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html)
+
+[Jacobian矩阵和Hessian矩阵介绍](http://jacoxu.com/jacobian%E7%9F%A9%E9%98%B5%E5%92%8Chessian%E7%9F%A9%E9%98%B5/)
+
+```python
+# 计算损失函数得最小值。
+from scipy.optimize import minimize
+# 规定最大迭代次数为400次
+res = minimize(costFunction, initial_theta, args=(X,y), jac=gradient, options={'maxiter':400})
+res
+# minimize()返回的格式是固定的，fun为costFunction函数迭代求得的最小值，hess_inv和jac分别为求得最小值时海森矩阵和雅克比矩阵的值，小写字母x为当costFunction函数最小时函数的解，在costFunction中即为theta的解。即计算损失函数最小时theta的值为[-25.16133284,   0.2062317 ,   0.2014716 ]。
+Out[17]: 
+      fun: 0.20349770158944375
+ hess_inv: array([[  3.31474479e+03,  -2.63892205e+01,  -2.70237122e+01],
+       [ -2.63892205e+01,   2.23869433e-01,   2.02682332e-01],
+       [ -2.70237122e+01,   2.02682332e-01,   2.35335117e-01]])
+      jac: array([ -9.52476821e-09,  -9.31921318e-07,  -2.82608930e-07])
+  message: 'Optimization terminated successfully.'
+     nfev: 31
+      nit: 23
+     njev: 31
+   status: 0
+  success: True
+        x: array([-25.16133284,   0.2062317 ,   0.2014716 ])
+```
+
+即损失函数最小时theta的值：
+
+```python
+theta = res.x.T
+theta
+Out[20]: array([-25.16133284,   0.2062317 ,   0.2014716 ])
+```
+
+**咱们来看看考试1得分45，考试2得分85的同学通过概率有多高**
+
+```python
+sigmoid(np.array([1,45,85]).dot(theta))
+Out[22]: 0.77629072405889421
+```
+
+即考试1得分45，考试2得分85的同学通过概率约为0.7763。
+
+**画出决策边界**
+
+```python
+# 标注考试1得分45，考试2得分85的同学
+plt.scatter(45, 85, s=60, c='r', marker='v', label='(45, 85)')
+# plotData为之前定义的画分类点的函数
+plotData(data, 'Exam 1 score', 'Exam 2 score', 'Admitted', 'Not admitted')
+# 生成网格数据
+x1_min, x1_max = X[:,1].min(), X[:,1].max(),
+x2_min, x2_max = X[:,2].min(), X[:,2].max(),
+xx1, xx2 = np.meshgrid(np.linspace(x1_min, x1_max), np.linspace(x2_min, x2_max))
+# 计算h的值
+h = sigmoid(np.c_[np.ones((xx1.ravel().shape[0],1)), xx1.ravel(), xx2.ravel()].dot(res.x))
+h = h.reshape(xx1.shape)
+# 作等高线，可理解为在这条线上h值为0.5
+plt.contour(xx1, xx2, h, [0.5], linewidths=1, colors='b')
+```
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归边界.png)
 
