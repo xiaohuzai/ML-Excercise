@@ -73,7 +73,7 @@ def computerCost（X,y,theta=[[0],[0]]）:
     J = 0
     # X点乘theta
     h = X.dot(theta)
-    J = 1.0/(2*m)*(np.sum)
+    J = 1.0/(2*m)*(np.sum(np.squre(h-y)))
 ```
 
 ```python

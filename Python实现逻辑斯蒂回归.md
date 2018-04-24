@@ -132,7 +132,7 @@ Cost:
 def gradient(theta, X, y):
     m = y.size
     # 此处h为一100*1的列向量
-    h = sigmoid(X.dot(theta))
+    h = sigmoid(X.dot(theta.reshape(-1,1)))
     # grad为一个3*100的矩阵
     grad =(1.0/m)*X.T.dot(h-y)
     return(grad.flatten())
@@ -143,4 +143,6 @@ print('Grad: \n', grad)
 
 Grad: 
  [ -0.1        -12.00921659 -11.26284221]
+
+**最小化损失函数**
 
