@@ -1,6 +1,6 @@
 # Python实现逻辑斯蒂回归
 
-[逻辑回归介绍](http://www.ai-start.com/ml2014/html/week3.html)
+[逻辑回归与加正则化的逻辑斯蒂回归介绍](http://www.ai-start.com/ml2014/html/week3.html)
 
 本实验室根据两次考试成绩与是否通过的数据，通过logistic回归，最后获得一个分类器。
 
@@ -213,3 +213,53 @@ plt.contour(xx1, xx2, h, [0.5], linewidths=1, colors='b')
 
 ![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归边界.png)
 
+## 加正则化项的逻辑斯蒂回归
+
+**导入数据**
+
+``` python
+data2 = loaddata('data2.txt', ',')
+```
+
+data2的格式为：
+
+Dimensions:  (118, 3)
+[[-0.092742  0.68494   1.      ]
+ [-0.21371   0.69225   1.      ]
+ [-0.375     0.50219   1.      ]
+ [-0.51325   0.46564   1.      ]
+ [-0.52477   0.2098    1.      ]]
+
+**作分布图**
+
+```python
+y = np.c_[data2[:,2]]
+X = data2[:,0:2]
+plotData(data2, 'Microchip Test 1', 'Microchip Test 2', 'y = 1', 'y = 0')
+```
+
+![](D:\ML-Excercise\pictures\chapter2\实验图\加正则化项的逻辑斯蒂回归数据分布1.png)
+
+在上一个逻辑回归试验中，我们把sigmoid函数（即这里的g函数）设置的为简单的一次多项式。
+
+![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归假设.PNG)
+
+**取高阶多项式放入sigmoid函数进行模拟**
+
+在这个逻辑回归实验里，因为样本的分布比较复杂，可以采用多次多项式来代替ΘTX。这里取最高六次项。
+
+```python
+from sklearn.preprocessing import PolynomialFeatures
+# 生成一个六次多项式
+poly = PolynomialFeatures(6)
+# XX为生成的六次项的数据
+XX = poly.fit_transform(data2[:,0:2])
+
+# 六次项后有28个特征值了。即，之前我们只有两个特征值x1、x2，取六次项多项式后我们会有x1、x2、x1^2、x2^2、x1*x2、x1^2*x2、……，总共28项。
+XX.shape
+Out[12]: (118, 28)
+```
+
+**正则化**
+
+因为取得的多项式最高项为6次，
