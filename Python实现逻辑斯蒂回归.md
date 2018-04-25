@@ -262,4 +262,97 @@ Out[12]: (118, 28)
 
 **正则化**
 
-因为取得的多项式最高项为6次，
+因为取得的多项式最高项为6次，容易发生过拟合情况。将损失函数采取“**正则化**”处理，引入惩罚项。
+
+正则化后损失函数：
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的损失函数.PNG)
+
+向量化的损失函数（矩阵形式）：
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的损失函数.PNG)
+
+```python
+# 定义损失函数
+def costFunctionReg(theta,reg ,XX, y):
+    m = y.size
+    h = sigmoid(XX.dot(theta))
+    J = -1.0*(1.0/m)*(np.log(h).T.dot(y)+np.log(1-h).T.dot(1-y)) +(reg/(2.0*m))*np.sum(np.square(theta[1:]))
+    if np.isnan(J[0]):
+        return(np.inf)
+    return(J[0])
+```
+
+
+
+与之对应的偏导（梯度）：
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\正则化梯度.png)
+
+向量化的偏导（梯度）：
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\正则化梯度的向量化表达.png)
+
+*注意，我们另外自己加的参数 θ0 不需要被正则化*
+
+```python
+# 定义正则化损失函数的偏导
+def gradientReg(theta, reg, XX, y):
+    m = y.size
+    h = sigmoid(XX.dot(theta.reshape(-1,1)))
+    grad = (1.0/m)*XX.T.dot(h-y) + (reg/m)*np.r_[[[0]],theta[1:].reshape(-1,1)]
+    return(grad.flatten())
+```
+
+设初始化theta为0向量，计算此时初始损失值
+
+```python
+initial_theta = np.zeros(XX.shape[1])
+costFunctionReg(initial_theta, 1, XX, y)
+
+Out[9]: 0.69314718055994529
+```
+
+**画出决策边界**
+
+定义预测函数，用来统计准确率。分类的阈值定为0.5，即计算的h(x)>0.5则分到1类（即通过），h(x)<0.5则分到0类（即不通过）：
+
+```python
+def predict(theta, X, threshold=0.5):
+    h = sigmoid(X.dot(theta.T)) >= threshold
+    # 返回的h值只会有两种，1或0
+    return(h.astype('int'))
+```
+
+决策边界，咱们分别来看看正则化系数lambda太大太小分别会出现什么情况
+
+> - Lambda = 0 : 就是没有正则化，这样的话，就过拟合咯
+> - Lambda = 1 : 这才是正确的打开方式
+> - Lambda = 100 : 卧槽，正则化项太激进，导致基本就没拟合出决策边界
+
+```python
+fig, axes = plt.subplots(1,3, sharey = True, figsize=(17,5))
+
+# 分别取lambda为0、1、100
+for i, C in enumerate([0.0, 1.0, 100.0]):
+    # 最优化 costFunctionReg
+    res2 = minimize(costFunctionReg, initial_theta, args=(C, XX, y), jac=gradientReg, options={'maxiter':3000})
+    
+    # 准确率
+    accuracy = 100.0*sum(predict(res2.x, XX) == y.ravel())/y.size    
+
+    # 对X,y的散列绘图
+    plotData(data2, 'Microchip Test 1', 'Microchip Test 2', 'y = 1', 'y = 0', axes.flatten()[i])
+    
+    # 画出决策边界
+    x1_min, x1_max = X[:,0].min(), X[:,0].max(),
+    x2_min, x2_max = X[:,1].min(), X[:,1].max(),
+    xx1, xx2 = np.meshgrid(np.linspace(x1_min, x1_max), np.linspace(x2_min, x2_max))
+    h = sigmoid(poly.fit_transform(np.c_[xx1.ravel(), xx2.ravel()]).dot(res2.x))
+    h = h.reshape(xx1.shape)
+    axes.flatten()[i].contour(xx1, xx2, h, [0.5], linewidths=1, colors='g');       
+    axes.flatten()[i].set_title('Train accuracy {}% with Lambda = {}'.format(np.round(accuracy, decimals=2), C))
+```
+
+![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂正则化分界结果.png)
+
