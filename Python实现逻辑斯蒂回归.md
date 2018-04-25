@@ -238,15 +238,15 @@ X = data2[:,0:2]
 plotData(data2, 'Microchip Test 1', 'Microchip Test 2', 'y = 1', 'y = 0')
 ```
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\加正则化项的逻辑斯蒂回归数据分布1.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E5%8A%A0%E6%AD%A3%E5%88%99%E5%8C%96%E9%A1%B9%E7%9A%84%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%831.png)
 
 在上一个逻辑回归试验中，我们把sigmoid函数（即这里的g函数）设置的为简单的一次多项式。
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归假设.PNG)
-
-**取高阶多项式放入sigmoid函数进行模拟**
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92%E5%81%87%E8%AE%BE.PNG)
 
 在这个逻辑回归实验里，因为样本的分布比较复杂，可以采用多次多项式来代替ΘTX。这里取最高六次项。
+
+**取高阶多项式放入sigmoid函数进行模拟**
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -266,11 +266,11 @@ Out[12]: (118, 28)
 
 正则化后损失函数：
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的损失函数.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)
 
 向量化的损失函数（矩阵形式）：
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的损失函数.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%90%91%E9%87%8F%E5%8C%96%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)
 
 ```python
 # 定义损失函数
@@ -287,11 +287,11 @@ def costFunctionReg(theta,reg ,XX, y):
 
 与之对应的偏导（梯度）：
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\正则化梯度.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E6%AD%A3%E5%88%99%E5%8C%96%E6%A2%AF%E5%BA%A6.png)
 
 向量化的偏导（梯度）：
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\正则化梯度的向量化表达.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E6%AD%A3%E5%88%99%E5%8C%96%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96%E8%A1%A8%E8%BE%BE.png)
 
 *注意，我们另外自己加的参数 θ0 不需要被正则化*
 
@@ -354,5 +354,5 @@ for i, C in enumerate([0.0, 1.0, 100.0]):
     axes.flatten()[i].set_title('Train accuracy {}% with Lambda = {}'.format(np.round(accuracy, decimals=2), C))
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂正则化分界结果.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E6%AD%A3%E5%88%99%E5%8C%96%E5%88%86%E7%95%8C%E7%BB%93%E6%9E%9C.png)
 
