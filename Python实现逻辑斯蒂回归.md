@@ -211,7 +211,7 @@ h = h.reshape(xx1.shape)
 plt.contour(xx1, xx2, h, [0.5], linewidths=1, colors='b')
 ```
 
-![](C:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归边界.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92%E8%BE%B9%E7%95%8C.png)
 
 ## 加正则化项的逻辑斯蒂回归
 
