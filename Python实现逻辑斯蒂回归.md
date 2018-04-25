@@ -49,7 +49,7 @@ def plotData(data, label_x, label_y, label_pos, label_neg, axes=None):
 plotData(data, 'Exam 1 score', 'Exam 2 score', 'Pass', 'Fail')
 ```
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂数据1.png)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E6%95%B0%E6%8D%AE1.png)
 
 读取数据作为X与y向量：
 
@@ -86,9 +86,9 @@ y为：
 
 **逻辑斯蒂回归**
 
-逻辑斯蒂回归假设为：
+逻辑斯蒂回归函数设为为：
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂回归假设.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92%E5%81%87%E8%AE%BE.PNG)
 
 ```python
 # 定义sigmoid函数
@@ -98,11 +98,11 @@ def sigmoid(z):
 
 损失函数为：
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂损失函数.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)
 
 向量化的损失函数（矩阵形式）：
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的损失函数.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%90%91%E9%87%8F%E5%8C%96%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.PNG)
 
 ```python
 # 定义损失函数
@@ -125,11 +125,11 @@ Cost:
 
 求偏导（梯度）
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂偏导.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%81%8F%E5%AF%BC.PNG)
 
 向量化的偏导（梯度）
 
-![](D:\ML-Excercise\pictures\chapter2\实验图\逻辑斯蒂向量化的偏导.PNG)
+![](https://raw.githubusercontent.com/xiaohuzai/ML-Excercise/master/pictures/chapter2/%E5%AE%9E%E9%AA%8C%E5%9B%BE/%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%90%91%E9%87%8F%E5%8C%96%E7%9A%84%E5%81%8F%E5%AF%BC.PNG)
 
 ```python
 # 求梯度
