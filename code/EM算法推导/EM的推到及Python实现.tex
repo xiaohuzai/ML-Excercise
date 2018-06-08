@@ -1,0 +1,642 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{EM????Python??}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{EM算法}\label{emux7b97ux6cd5}
+
+\subparagraph{by 加号, 网易云课堂 X 稀牛学院 机器学习工程师
+附加课件}\label{by-ux52a0ux53f7-ux7f51ux6613ux4e91ux8bfeux5802-x-ux7a00ux725bux5b66ux9662-ux673aux5668ux5b66ux4e60ux5de5ux7a0bux5e08-ux9644ux52a0ux8bfeux4ef6}
+
+很多情况下，如果我们数据本身有缺省，我们使用EM来最优化一个Objective
+Function。
+
+标记
+
+\(Y_o\): 观测数据
+
+\(Y_m\): 缺省数据
+
+\(Y_c\): \((Y_o, Y_m)\), 完整数据
+
+\(f(Y_c|\theta)\): 完整数据的分布
+
+\(g(Y_o | \theta) = \int f(Y_c|\theta) dY_m\) : 观测数据的分布
+
+\(k(Y_m | Y_o, \theta) = \frac{f(Y_c|\theta)}{\int f(Y_c|\theta) dY_m} =\frac{f(Y_c|\theta)}{g(Y_o |\theta)}\):
+当观测数据给出的时候，缺失数据的分布。当然，当我们加上缺省数据的时候，这个应该是等于1的。
+
+在机器学习里面，我们的目标就是，在数据缺省的情况下，依旧能最大化一个log
+likelihood。（或者说，找到一个\(\theta\)，来使得log likelihood最大化）
+\[l(\theta) = \log g(Y_o| \theta)\]
+
+显然，当数据缺省的时候，我们很难搞这个最大化的计算，所以我们真正计算的时候，使用的是另一个数值
+\(Q(\theta | \theta^{p})\) 。它是基于 \(\theta^{p}\) 的一个值，代表着
+\(\theta\) 在第P次循环以后的值。同时，这个数值还得有一个特性：
+
+\begin{itemize}
+\tightlist
+\item
+  当 \(\theta\) 最优化了 \(Q(\theta | \theta^{p})\) 的时候，它也得最优化
+  \(l(\theta)\) 。（因为P可以无穷大）
+\item
+  给定 \(\theta^{p}\) 时，\(Q(\theta | \theta^{p})\) 的最大化得比
+  \(l(\theta)\) 容易。（要不然就没有意义了）
+\end{itemize}
+
+接下来，我们来创造出符合我们要求的这样一个 \(Q(\theta | \theta^{p})\) ：
+
+利用我们刚刚提到的那个『观测数据给出的时候，缺失数据的分布』的分布
+\(k(Y_m | Y_o, \theta) =\frac{f(Y_c|\theta)}{g(Y_o |\theta)}\)，
+我们可以得到：（这几步变换都不难，悉心看一下就理解了）
+
+\[\begin{aligned}[t] \log f(Y_c|\theta) &= \log g(Y_o|\theta) + \log k(Y_m|Y_o,\theta) \\ \Leftrightarrow \log f(Y_c|\theta) k(Y_m|Y_o,\theta') &= \log g(Y_o|\theta) k(Y_m|Y_o,\theta')+ \log k(Y_m|Y_o,\theta) k(Y_m|Y_o,\theta') \\ &\text{(}\theta \neq \theta' \text{)} \\ \Leftrightarrow \int \log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m&= \int \log g(Y_o|\theta) k(Y_m|Y_o,\theta') dY_m+ \int \log k(Y_m|Y_o,\theta) k(Y_m|Y_o,\theta') dY_m \\ \Leftrightarrow E_{Y_m} [\log f(Y_c|\theta) | Y_o, \theta'] &= \log g(Y_o|\theta) + E_{Y_m} [\log k(Y_m|Y_o,\theta')] \\ \Leftrightarrow Q(\theta| \theta') &= l(\theta) + H(\theta | \theta') \end{aligned}\]
+
+这里，我们关心的是 \(Q(\theta | \theta')\)，而不是
+\(H(\theta|\theta')\)。
+
+至此，通过Jensen不等式（超纲内容，可自行百度），我们可以得出最大化
+\(Q(\theta|\theta')\) 与 \(l(\theta)\) 是一样儿一样儿的。
+
+那么，\(Q(\theta | \theta^{p})\) 长什么样？
+
+\[Q(\theta | \theta^{p}) =\int \log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m = E_{Y_m} [\log f(Y_c|\theta) | Y_o, \theta']\]
+
+仔细拆解一下这里面所有的成分：
+
+\begin{itemize}
+\item
+  \(Y_o\) 是个已知量，因为它是观测数据，就是说，我们已经得到了的数据。
+\item
+  同时 \(\theta'\) 也是已知。根据EM算法框架，我们是先给 \(\theta'\)
+  一个任意值，然后一步步迭代，最终得到一个稳定最有的解。（这就是机器学习的思维）
+\item
+  \(k(Y_m|Y_o,\theta')\)
+  上面提过很多次，这就是观测数据已经给出的情况下的缺省数据的分布，也就是一个条件概率。它也是解决EM问题的关键所在。之后我们会运用它来积起
+  \(\int \log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m\) 里面的 \(Y_m\)。
+\item
+  \$ \log f(Y\_c\textbar{}\theta)\$ 这是在 \(\theta\)
+  给定的情况下的全局分布。
+\item
+  \(Q(\theta | \theta^{p})\) 这位大佬就是把 \(Y_m\) 从 \$
+  \log f(Y\_c\textbar{}\theta)\$ 中化出来以后的东西。
+\end{itemize}
+
+    \subsection{案例}\label{ux6848ux4f8b}
+
+好，接下来我们举个具体的例子来看看怎么实际操作这一堆公式：
+
+你手上有两个硬币A和B。你眼神儿不太好，也不知道哪个是A哪个是B，就瞎扔一通。按照万物真理，A硬币和B硬币都各自有各自的出正面的几率，我们表示为：\(\theta_A\)
+和 \(\theta_B\)。
+
+你随便挑一个硬币，扔10次。重复5次，也就是一共扔了50次。
+
+这时候，你的观测数据，就是那50次的正反面记录。这个是已知的。未知的就是，这里面，你到底每一次扔的是A还是B。
+
+用程序的语言给出的结果就是：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{xs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{xs}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} array([[5, 5],
+               [9, 1],
+               [8, 2],
+               [4, 6],
+               [7, 3]])
+\end{Verbatim}
+        
+    以上是我们已知的观测数据。
+
+\subsubsection{表达式}\label{ux8868ux8fbeux5f0f}
+
+接下来，我们的\textbf{未知数据}是：
+
+\(Y_m = (c_1,c_2,c_3,c_4,c_5)\) 其中
+\(c_i = [c_{i1}, c_{i2}]\in \{ [1,0], [0,1]\}\)
+
+这就是我们每一次拿起来的拿个硬币是A还是B的分布。
+
+比如，当i=3，拿起的是B的时候，我们有\(c_{i} = c_{3} = [0,1]\)
+
+当i=2，拿起的是A的时候，我们有\(c_{i} = c_{2} = [1,0]\)
+
+回过头来，用我们最前面的表达形式，把我们的\textbf{已知数据}写出来：
+
+\(Y_o = (y_{o1}, y_{o2}, y_{o3}, y_{o4}, y_{o5})\) 其中 \$Y\_\{oi\} = \$
+第i次选币之后，扔出来，出现正面的次数。
+
+于是我们刚刚举例子的那个数据，写出来就是：
+
+\(Y_o = (5,9,8,4,7)\)
+
+同时我们知道，任何硬币，都是要么正要么反的（不考虑竖着掉在缝儿里的情况）。所以，这是一个二项分布（或者叫伯努利分布），于是我们有：
+
+\[y_{oi}|A \sim binom(y_{oi}, n, \theta_A) = \theta_A^{y_{oi}} (1-\theta_A)^{10-y_{oi}} \]\[y_{oi}|B \sim binom(y_{oi}, n, \theta_B)\]
+
+一个完整的分布就是观测数据和缺省数据合在一起：
+
+\(Y_c = (Y_m, Y_o)\).
+
+以及，我们最终要求的
+
+\(\theta = (\theta_A, \theta_B)\)
+
+除了以上这些，我们还需要的是我们自己的金手指概率（就是我们摸到了A还是摸到了B的概率），我们这样表示
+
+\(p(\theta_A) = \phi\) and \(p(\theta_B)= 1-\phi\)
+（这个例子里，我们假设，挑A还是挑B是0.5的随机）
+
+有了这些，我们就可以得出：
+
+\(f(Y_c|\theta)\) 在 \((\theta_A, \theta_B)\)
+给定的情况下，符合二项分布。
+
+\subsubsection{联合概率分布的表达形式}\label{ux8054ux5408ux6982ux7387ux5206ux5e03ux7684ux8868ux8fbeux5f62ux5f0f}
+
+现在，我们来把这个案例里所有写出来的表达式与最前面聊的联合分布们联系起来：
+
+\[\begin{aligned}[t] p(y_o,y_m| \theta) &= f(Y_c|\theta)\\ &= p( [y_{o1},y_{o2},y_{o3},y_{o4},y_{o5}], [c_{1},c_{2},c_{3},c_{4},c_{5}] | (\theta_A', \theta_B')) \\ &= p( [y_{o1},y_{o2},y_{o3},y_{o4},y_{o5}] | [c_{1},c_{2},c_{3},c_{4},c_{5}] , (\theta_A', \theta_B')) p([c_{1},c_{2},c_{3},c_{4},c_{5}]| (\theta_A', \theta_B'))\\ &= p( [y_{o1},y_{o2},y_{o3},y_{o4},y_{o5}] | [c_{1},c_{2},c_{3},c_{4},c_{5}] , (\theta_A', \theta_B')) p([c_{1},c_{2},c_{3},c_{4},c_{5}]) \\ &= \prod_{i=1}^5 p(y_{oi}|c_i,( (\theta_A', \theta_B'))) \prod_{i=1}^5 p(c_i) \end{aligned}\]
+
+假设 \(Y_c\) = {[}(A,A,A,B,B), (5,9,8,4,7){]}, 那么
+\[f(Y_c|\theta) = binom(5,10,\theta_A)p(A) * binom(9,10,\theta_A)p(A) * ... * binom(7,10,\theta_B)p(B)\]
+
+现在，问题来了，我们并不知道{[}A,A,A,B,B{]}这个分布，我们的问题设定里，我们的眼神儿不好，看不到这个分布。
+
+于是，我们需要用上EM来解决问题：
+
+    \subsubsection{开整EM}\label{ux5f00ux6574em}
+
+\begin{itemize}
+\tightlist
+\item
+  搞定 \$ k(Y\_m\textbar{}Y\_o,\theta') \$
+\end{itemize}
+
+\[Q(\theta | \theta^{p}) =\int \log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m \]\[k(Y_m|Y_o,\theta') = p(Y_m | (5,9,8,4,7), (\theta_A', \theta_B'))\]
+
+其中 \(\theta_A'\) 和 \(\theta_B'\) 是随机给的。
+
+根据独立概率原理，
+
+\[k(Y_m|Y_o,\theta') = p([y_{m1},y_{m2},y_{m3},y_{m4},y_{m5}]| (5,9,8,4,7), (\theta_A', \theta_B'))\]
+\[ = p([c_{1},c_{2},c_{3},c_{4},c_{5}]| (5,9,8,4,7), (\theta_A', \theta_B'))\]
+\[= \prod_{i=1}^5 p(c_{i}| y_{oi}, (\theta_A', \theta_B'))\] 其中
+\((5,9,8,4,7) = (y_{o1}, y_{o2}, y_{o3},y_{o4},y_{o5})\)
+
+那么，什么是 \(\prod_{i=1}^5 p(c_{i}| y_{oi}, (\theta_A', \theta_B'))\)
+呢？
+
+根据贝叶斯公式，
+
+\[p(y_{mi}|y_{oi},\theta') = \frac{ p( y_{oi} | y_{mi}, \theta') p(y_{mi} | \theta')}{ \sum_{mi = A,B} p( y_{oi} | y_{mi}, \theta') p(y_{mi} | \theta')}\]
+
+所以
+\[p(c_{i}|y_{oi},\theta') = \frac{ p( y_{oi} | c_{i}, \theta') p(c_{i} | \theta')}{ \sum_{c_i} p( y_{oi} | c_{i}, \theta') p(c_{i} | \theta')}\]
+
+并且，我们已知： \$p( y\_\{oi\} \textbar{} y\_\{mi\}, \theta') \$ 和
+\(p(y_{mi} | \theta)\)
+
+\$p( y\_\{oi\} \textbar{} y\_\{mi\}, \theta') \$
+在这儿就是个二项分布，比如
+\(p(5 | A, \theta') = p(5|A) = binom(5,10,\theta_A')\)
+
+同时，我们选币的概率跟硬币出正反的概率，也是不想干的：
+
+\(p(y_{mi} |\theta') = p(y_{mi})\)
+
+\[\begin{aligned}[t] \prod_{i=1}^5 p(c_{i}| y_{oi}, (\theta_A', \theta_B')) &= \prod_{i=1}^5 \frac{ p( y_{oi} | c_{i}, \theta') p(c_{i} | \theta')}{ \sum_{c_i} p( y_{oi} | c_{i}, \theta') p(c_{i} | \theta')} \\ &= \prod_{i=1}^5 \frac{ p( y_{oi} | c_{i}, \theta') p(c_{i} )}{ \sum_{c_i} p( y_{oi} | c_{i}, \theta') p(c_{i}) } \\ &= \prod_{i=1}^5 \frac{ p \left( y_{oi} \big| \begin{bmatrix} c_{i1} \\ c_{i2} \end{bmatrix}, \begin{bmatrix} \theta'_{1} \\ \theta'_{2} \end{bmatrix} \right) p\left(\begin{bmatrix} c_{i1} \\ c_{i2} \end{bmatrix} \right)}{ \sum_{c_i} p \left( y_{oi} \big| \begin{bmatrix} c_{i1} \\ c_{i2} \end{bmatrix}, \begin{bmatrix} \theta_{1}' \\ \theta_{2}' \end{bmatrix} \right) p\left(\begin{bmatrix} c_{i1} \\ c_{i2} \end{bmatrix} \right) } \\ = \prod_{i=1}^5 \prod_{k=1}^2 &\frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^0 p(c_{i2}) + \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^0 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \\ \text{因为 } &c_i \in \left\{ \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right\}\\ &= \prod_{i=1}^5 \prod_{k=1}^2 \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \end{aligned}\]
+
+\begin{itemize}
+\tightlist
+\item
+  搞定 \(\log f(Y_c|\theta)\)
+\end{itemize}
+
+已知：
+
+\[\begin{aligned}[t] f(Y_c|\theta) &= \prod_{i=1}^5 p(y_{oi}|c_i,( (\theta_A', \theta_B'))) \prod_{i=1}^5 p(c_i)\\ \end{aligned}\]
+
+和
+
+\[\begin{aligned} p(y_{oi}|c_i,( (\theta_A', \theta_B'))) &= \left[ binom(n, y_{oi}, \theta_1 ) \right]^{c_{i1} } \left[ binom(n, y_{oi}, \theta_2 ) \right]^{c_{i2} } \\ &= \prod_{k=1}^2 \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}}\right]^{c_{ik}} \end{aligned}\]
+
+以及
+
+\[\begin{aligned} p(c_i) &= \prod_{k=1}^2 \pi_k^{c_{ik}} \end{aligned}\]
+
+其中 \(\pi_k\) 是选A还是B的概率：\(k=1\) 选 \(A\)，\(k=2\) 选 \(B\)。
+当然，\(\pi_1 + \pi_2 = 1\)。
+
+那么
+
+\[\begin{aligned}[t] f(Y_c|\theta) &= \prod_{i=1}^5 p(y_{oi}|c_i,( (\theta_A', \theta_B'))) \prod_{i=1}^5 p(c_i)\\ &= \prod_{i=1}^5 \prod_{k=1}^2 \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}}\right]^{c_{ik}} \prod_{i=1}^5 \prod_{k=1}^2 \pi_k^{c_{ik}} \end{aligned}\]
+
+所以
+
+\[ log f(Y_c|\theta) = \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}} \right] + \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \pi_k\]
+
+    \subsubsection{至此，我们有两个东西了：}\label{ux81f3ux6b64ux6211ux4eecux6709ux4e24ux4e2aux4e1cux897fux4e86}
+
+\$ k(Y\_m\textbar{}Y\_o,\theta') \$
+
+\(log f(Y_c|\theta)\)
+
+我们需要最大化的是 \[\int \log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m\]
+
+\subsubsection{E步骤（Expectation）}\label{eux6b65ux9aa4expectation}
+
+\[\begin{aligned}[t] \int &log f(Y_c|\theta) k(Y_m|Y_o,\theta') dY_m \\ &= \int \left[ \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}} \right] + \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \pi_k \right] \left[ \prod_{i=1}^5 \prod_{k=1}^2 \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \right] dY_m \end{aligned}\]
+
+因为 \(Y_m = (c_1,...c_5)\)，所以在这个积分方程中的变量是
+\(\log f(Y_c|\theta)\) 中的\(c_{ik}\)
+
+在这个例子中，为了积分需要，我们考虑其他所有变量为常数。并把
+\(\log f(Y_c|\theta)\) 当做 \(c_{ik}\) 的线性相加。
+因为积分（log以后）和相加之间的关系，我们只需要计算
+\[ E(c_{ik}) = \int c_{ik} k(Y_m | Y_o, \theta') dY_m\]
+
+\[\begin{aligned}[t] E(c_{ik}) &= \int c_{ik} k(Y_m | Y_o, \theta') dY_m \\ & = \int c_{ik} \prod_{i=1}^5 \prod_{j=1}^2 k'(c_{ik} | Y_o, \theta') dY_m \\ & = \int c_{ik} k'(c_{ik} | Y_o, \theta') dc_{ik} \text{ 所有跟 } c_{ik} \text{ 无关的都积成1}\\ &= \int c_{ik} \left[ \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \right] dc_{ik} \\ &\text{因为 $c_{ik} \in \{0,1\}$, 这个integration就是一个相加} \\ &= \sum_{c_{ik} = \{0,1 \}} c_{ik} \left[ \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \right] \\ &= \left[ \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \right] \end{aligned}\]
+
+所以，在每一个E步骤，我们要计算这个
+
+\[\begin{aligned}[t] \int &\left[ \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}} \right] + \sum_{i=1}^5 \sum_{k=1}^2 c_{ik} \log \pi_k \right] \left[ \prod_{i=1}^5 \prod_{k=1}^2 \frac{\left[ \theta_k'^{y_{oi} } (1-\theta_k')^{n- y_{oi}} \right]^{c_{ik}} p(c_{ik}) }{ \left[ \theta_1'^{y_{oi} } (1-\theta_1')^{n- y_{oi}} \right]^1 p(c_{i1}) + \left[ \theta_2'^{y_{oi} } (1-\theta_2')^{n- y_{oi}} \right]^1 p(c_{i2})} \right]dY_m \\ &= \left[ \sum_{i=1}^5 \sum_{k=1}^2 E(c_{ik}) \log \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}} \right] + \sum_{i=1}^5 \sum_{k=1}^2 E(c_{ik}) \log \pi_k \right] \\ & = Q(\theta | \theta^{p}) \end{aligned}\]
+
+用来验证结果是否已经converge了。
+
+\subsubsection{M步骤（Maximization）}\label{mux6b65ux9aa4maximization}
+
+在这里，我们要找的是一个 \(\theta\) 用来最大化
+\(Q(\theta | \theta^{p})\) 。 注意，\(E(c_{ik})\)
+在这里是个常数，而不是基于 \(\theta\) 的变量。
+
+计算方法就是：求导之后等于零。
+
+\[\begin{aligned}[t] \frac{dQ(\theta|\theta^p)}{d\theta_k} &= \frac{d}{d\theta_k} \left[ \sum_{i=1}^5 \sum_{k=1}^2 E(c_{ik}) \log \left[\theta_k^{y_{oi}} (1-\theta_k)^{n - y_{oi}} \right] + \sum_{i=1}^5 \sum_{k=1}^2 E(c_{ik}) \log \pi_k \right] \\ &= \sum_{i=1}^5 E(c_{ik}) \left[ y_{oi} \frac{1}{\theta_k} - (n-y_{oi}) \frac{1}{1 -\theta_k} \right] = 0 \\ &= \sum_{i=1}^5 E(c_{ik}) \left[ y_{oi} (1 - \theta_k) - (n-y_{oi}) \theta_k \right] = 0 \end{aligned}\]
+
+最后我们得到
+
+\[\theta_k = \frac{\sum_{i=1}^5 E(c_{ik}) y_{oi}}{\sum_{i=1}^5n E(c_{ik})}\]
+
+    说了这么多，代码写出来很简单：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{ys} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{thetas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 初始化两个theta}
+        \PY{n}{pis} \PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 随手拿出A还是B硬币的概率都设为0.5}
+        
+        \PY{n}{tolerance} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{n}{max\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{100}
+        
+        \PY{n}{loglike\PYZus{}old} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+            \PY{n}{E\PYZus{}c1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{E\PYZus{}c2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{EcY\PYZus{}1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{EcY\PYZus{}2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{loglike\PYZus{}new} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{c+c1}{\PYZsh{} E步骤: }
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ys}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+        
+                \PY{c+c1}{\PYZsh{} multinomial log likelihood （对于这个案例，我们用的是伯努利）}
+                \PY{n}{log\PYZus{}k1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{ys}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{}  \PYZbs{}log [\PYZbs{}theta\PYZus{}k\PYZca{}\PYZob{}y\PYZus{}\PYZob{}oi\PYZcb{}\PYZcb{} (1\PYZhy{}\PYZbs{}theta\PYZus{}k)\PYZca{}\PYZob{}n \PYZhy{} y\PYZus{}\PYZob{}oi\PYZcb{}\PYZcb{} ]  }
+                \PY{n}{log\PYZus{}k2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{ys}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{}  \PYZbs{}log [\PYZbs{}theta\PYZus{}k\PYZca{}\PYZob{}y\PYZus{}\PYZob{}oi\PYZcb{}\PYZcb{} (1\PYZhy{}\PYZbs{}theta\PYZus{}k)\PYZca{}\PYZob{}n \PYZhy{} y\PYZus{}\PYZob{}oi\PYZcb{}\PYZcb{} ] }
+        
+                \PY{c+c1}{\PYZsh{} 得到 c\PYZus{}ik 的期望}
+                \PY{n}{denom} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}k1}\PY{p}{)} \PY{o}{*} \PY{n}{pis}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}k2}\PY{p}{)} \PY{o}{*} \PY{n}{pis}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{E\PYZus{}ci1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}k1}\PY{p}{)} \PY{o}{*} \PY{n}{pis}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n}{denom}
+                \PY{n}{E\PYZus{}ci2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}k2}\PY{p}{)} \PY{o}{*} \PY{n}{pis}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n}{denom}
+        
+                \PY{c+c1}{\PYZsh{} 更新完整的 log likelihood  }
+                \PY{c+c1}{\PYZsh{} 我们只在这一步检查它是否converge，并不更新theta }
+                \PY{n}{loglike\PYZus{}new} \PY{o}{+}\PY{o}{=} \PY{n}{E\PYZus{}ci1} \PY{o}{*} \PY{n}{log\PYZus{}k1} \PY{o}{+} \PY{n}{E\PYZus{}ci2} \PY{o}{*} \PY{n}{log\PYZus{}k2}
+                \PY{n}{E\PYZus{}c1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{E\PYZus{}ci1}\PY{p}{)}
+                \PY{n}{E\PYZus{}c2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{E\PYZus{}ci2}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} M步骤：}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ys}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{EcY\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{E\PYZus{}c1}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{ys}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{p}{)}  
+                \PY{n}{EcY\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{E\PYZus{}c2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{ys}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{p}{)}
+            \PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{EcY\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{EcY\PYZus{}1}\PY{p}{)}
+            \PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{EcY\PYZus{}2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{EcY\PYZus{}2}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iteration: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{theta\PYZus{}A = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{, theta\PYZus{}B = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{, difference in loglike = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{thetas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{loglike\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{loglike\PYZus{}old}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{loglike\PYZus{}new} \PY{o}{\PYZhy{}} \PY{n}{loglike\PYZus{}old}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{tolerance}\PY{p}{:}
+                \PY{k}{break}
+            \PY{n}{loglike\PYZus{}old} \PY{o}{=} \PY{n}{loglike\PYZus{}new}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration: 5
+theta\_A = 0.71, theta\_B = 0.58, difference in loglike = -32.69
+Iteration: 5
+theta\_A = 0.75, theta\_B = 0.57, difference in loglike = 1.43
+Iteration: 5
+theta\_A = 0.77, theta\_B = 0.55, difference in loglike = 0.50
+Iteration: 5
+theta\_A = 0.78, theta\_B = 0.53, difference in loglike = 0.43
+Iteration: 5
+theta\_A = 0.79, theta\_B = 0.53, difference in loglike = 0.26
+Iteration: 5
+theta\_A = 0.79, theta\_B = 0.52, difference in loglike = 0.12
+Iteration: 5
+theta\_A = 0.80, theta\_B = 0.52, difference in loglike = 0.05
+Iteration: 5
+theta\_A = 0.80, theta\_B = 0.52, difference in loglike = 0.02
+Iteration: 5
+theta\_A = 0.80, theta\_B = 0.52, difference in loglike = 0.01
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
